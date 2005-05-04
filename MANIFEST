@@ -1,7 +1,7 @@
 Changes
 Makefile.PL
 MANIFEST
-doc/README
+README
 doc/examples/example1.pl
 doc/examples/example2.pl
 t/Config-YUM.t
