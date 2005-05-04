@@ -1,4 +1,4 @@
-Config::YUM version 0.01
+Config::YUM version 1.4
 =======================
 
 Config::YUM is use to parse a yum.conf file. It downloads remote include
