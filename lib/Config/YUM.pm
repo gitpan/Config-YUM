@@ -1,7 +1,7 @@
 package Config::YUM;
 
 # I cannot live without this.
-use 5.008006;
+use 5.008;
 use strict;
 use warnings;
 
@@ -33,7 +33,7 @@ our @EXPORT = qw(
 );
 
 # Define our version, comes from CVS.
-(our $VERSION) = '$Revision: 1.5 $' =~ /([\d.]+)/;
+(our $VERSION) = '$Revision: 1.6 $' =~ /([\d.]+)/;
 
 # The new function is used to create an instance of this package.
 # You can define various things. Please have a look at the documentation
