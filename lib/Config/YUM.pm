@@ -33,7 +33,7 @@ our @EXPORT = qw(
 );
 
 # Define our version, comes from CVS.
-(our $VERSION) = '$Revision: 1.6 $' =~ /([\d.]+)/;
+(our $VERSION) = '$Revision: 1.7 $' =~ /([\d.]+)/;
 
 # The new function is used to create an instance of this package.
 # You can define various things. Please have a look at the documentation
@@ -169,16 +169,24 @@ sub parse {
 				open($fh, $filename);
 				while(<$fh>) {
 					chomp;
-					push @baseurls, $_;
+					unless($_ =~ /^#/) {
+						if($_) {
+							push @baseurls, $_
+						}
+					}
 				}
 				close($fh);
 				remove $fh;
 				# Provide a baseurl
 				$self->{__yumconf}->{$section}->{baseurl} = $baseurls[0];
 				# Safe an array of baseurls extra (could be used to make the failover stuff)
-				$self->{__yumconf}->{$section}->{baseurls} = @baseurls if @baseurls > 1;
+				$self->{__yumconf}->{$section}->{baseurls} = \@baseurls if @baseurls > 1;
 				# Delete the mirrorlist from the hash, as we don't need it any more.
 				delete $self->{__yumconf}->{$section}->{mirrorlist};
+				# Make the substitutions...
+				$self->{__yumconf}->{$section}->{baseurl} = $self->substi($self->{__yumconf}->{$section}->{baseurl});
+				# Download/parse primary.xml.gz if defined to do so (at new)
+				$self->{__yumconf}->{$section}->{primary} = $self->read_primary($self->{__yumconf}->{$section}->{baseurl}.'/repodata/primary.xml.gz') if $self->{download_primary};
 			} else {
 				# Die, if we have no baseurl for some repo. We really should not continue
 				# if a repo has no baseurl. Also yum itself dies, if this happens, so we
