@@ -15,7 +15,6 @@ use FreezeThaw qw/thaw safeFreeze/;
 use Config::IniHash;
 use Hash::Merge qw/merge/;
 use File::Temp qw/tempfile/;
-use File::Remove qw/remove/;
 use Cache::File;
 use XML::LibXML;
 use Sort::Versions;
@@ -33,7 +32,7 @@ our @EXPORT = qw(
 );
 
 # Define our version, comes from CVS.
-(our $VERSION) = '$Revision: 1.7 $' =~ /([\d.]+)/;
+(our $VERSION) = '$Revision: 1.8 $' =~ /([\d.]+)/;
 
 # The new function is used to create an instance of this package.
 # You can define various things. Please have a look at the documentation
@@ -176,7 +175,7 @@ sub parse {
 					}
 				}
 				close($fh);
-				remove $fh;
+				unlink $filename;
 				# Provide a baseurl
 				$self->{__yumconf}->{$section}->{baseurl} = $baseurls[0];
 				# Safe an array of baseurls extra (could be used to make the failover stuff)
@@ -248,7 +247,7 @@ sub read_primary($) {
 
 	# Remove the tempfile, as we don't need it any more and we
 	# clean up temps usually (arg. we REALLY should!)
-	remove $filename;
+	unlink $filename;
 
 	# Init the parser;
 	my $parser = XML::LibXML->new();
@@ -337,7 +336,7 @@ sub get_include($) {
 		print $fh $data;
 		close($fh);
 		my $inc_hash = ReadINI($filename);
-		remove $filename;
+		unlink $filename;
 		return $inc_hash;
 	} else {
 		# Same here with ftp:
@@ -348,7 +347,7 @@ sub get_include($) {
 			print $fh $data;
 			close($fh);
 			my $inc_hash = ReadINI($filename);
-			remove $filename;
+			unlink $filename;
 			return $inc_hash;
 		} else {
 			# If it begins with slash, it can be directly read with ReadINI
@@ -521,7 +520,6 @@ RPM2
 LWP::UserAgent
 FreezeThaw
 File::Temp
-File::Remove
 Cache::File
 XML::LibXML
 Sort::Versions
