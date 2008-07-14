@@ -32,7 +32,7 @@ our @EXPORT = qw(
 );
 
 # Define our version, comes from CVS.
-(our $VERSION) = '$Revision: 1.8 $' =~ /([\d.]+)/;
+(our $VERSION) = '$Revision: 1.9 $' =~ /([\d.]+)/;
 
 # The new function is used to create an instance of this package.
 # You can define various things. Please have a look at the documentation
@@ -266,17 +266,22 @@ sub read_primary($) {
 		my $version = @{$child->getChildrenByTagName("version")}[0]->getAttribute("ver");
 		my $release = @{$child->getChildrenByTagName("version")}[0]->getAttribute("rel");
 		my $epoch   = @{$child->getChildrenByTagName("version")}[0]->getAttribute("epoch");
+		my $arch    = @{$child->getChildrenByTagName("arch")}[0]->textContent();
 		# This is black magic. :-)
 		# primary.xml.gz also lists older packages, if you don't have a very clean yum-repo
 		# This functions checks the epoch first and afterward the version/release...
 		# Might be no bad idea to also save the old packages to the hash, but I didn't need
 		# this yet...
 		if($packages->{$name}) {
+			# prefer the basearch over all others
+			next if ($arch ne $self->{'basearch'} and
+					$packages->{$name}->{'arch'} eq $self->{'basearch'});
 			if($epoch > $packages->{$name}->{epoch}) {
 				$packages->{$name} = {
 					version => $version,
 					release => $release,
 					epoch   => $epoch,
+					arch    => $arch,
 				};
 			} else {
 				my $verel1 = $version . "-" . $release;
@@ -287,6 +292,16 @@ sub read_primary($) {
 							version => $version,
 							release => $release,
 							epoch   => $epoch,
+							arch    => $arch,
+						};
+					}
+				} elsif (versioncmp($verel1, $verel2) == 0) {
+					if ($packages->{$name}->{'arch'} ne $self->{'basearch'}) {
+						$packages->{$name} = {
+							version => $version,
+							release => $release,
+							epoch   => $epoch,
+							arch    => $arch,
 						};
 					}
 				}
@@ -296,6 +311,7 @@ sub read_primary($) {
 				version => $version,
 				release => $release,
 				epoch   => $epoch,
+				arch    => $arch,
 			};
 		}
 	}

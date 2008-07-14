@@ -1,4 +1,7 @@
 Revision history for Perl extension Config::YUM.
 
+1.9 Mon Jul 14 09:36:00 2008
+    - Integrate patch from Nicolas Simonds <nsimonds@myspace.com> to report arch
+
 0.1 Tue May  3 16:45:36 2005
 	- Initial version
