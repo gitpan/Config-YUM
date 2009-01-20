@@ -1,0 +1,83 @@
+2009-01-20 10:16  oliver
+
+	* Makefile.PL, lib/Config/YUM.pm: * Add Cache::File to the list of
+	  required modules
+
+2008-07-14 09:38  oliver
+
+	* Changes, perl-Config-YUM.spec, META.yml: * Update META and
+	  Changes
+
+2008-07-14 09:37  oliver
+
+	* lib/Config/YUM.pm: * Add patch by Nicolas Simonds
+	  <nsimonds@myspace.com> to report arch
+
+2005-05-30 14:55  oliver
+
+	* META.yml: * Update tht META.yml
+
+2005-05-30 14:41  oliver
+
+	* lib/Config/YUM.pm: * Remove the use of File::Remove, unlink does
+	  the same. Fix a removal problem of a tempfile (used fh instead of
+	  filename)
+
+2005-05-20 15:00  oliver
+
+	* lib/Config/YUM.pm: * Bugfix: Don't save baseurls beginning with
+	  #, don't save '' in baseurls; * Download the primary.gz also if
+	  there are more urls...
+
+2005-05-09 10:36  oliver
+
+	* META.yml: * Add META
+
+2005-05-09 10:34  oliver
+
+	* lib/Config/YUM.pm: * Use only 5.8
+
+2005-05-09 10:22  oliver
+
+	* Makefile.PL: * Don't require perl 5.8.6, 5.8.0 should be good
+	  enough
+
+2005-05-04 17:37  oliver
+
+	* lib/Config/YUM.pm: * Update version. Fixed Makefile.PL
+
+2005-05-04 17:34  oliver
+
+	* Makefile.PL, README: * Fix Makefile.PL. Add version to
+	  requirements...
+
+2005-05-04 15:06  oliver
+
+	* MANIFEST: * Add META.yml
+
+2005-05-04 15:06  oliver
+
+	* MANIFEST, lib/Config/YUM.pm: * README moved, must repackage as
+	  1.4
+
+2005-05-04 14:50  oliver
+
+	* MANIFEST, README, doc/README: * README must be here...
+
+2005-05-04 14:32  oliver
+
+	* lib/Config/: YUM.pm: * Update version to reflect real version...
+
+2005-05-04 14:31  oliver
+
+	* Changes, MANIFEST, Makefile.PL, doc/README,
+	  doc/examples/example1.pl, doc/examples/example2.pl,
+	  lib/Config/YUM.pm, t/Config-YUM.t:
+	  Initial import
+
+2005-05-04 14:31  oliver
+
+	* Changes, MANIFEST, Makefile.PL, doc/README,
+	  doc/examples/example1.pl, doc/examples/example2.pl,
+	  lib/Config/YUM.pm, t/Config-YUM.t: Initial revision
+

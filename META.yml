@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Config-YUM
-version:             1.9
+version:             1.10
 abstract:            Perl extension for parsing yum.conf
 license:             ~
 author:              
@@ -8,6 +8,7 @@ author:
 generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
+    Cache::File:                   0
     Config::IniHash:               0
     File::Remove:                  0
     File::Temp:                    0

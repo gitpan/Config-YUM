@@ -14,6 +14,7 @@ WriteMakefile(
 							XML::LibXML => 0,
 							Sort::Versions => 0,
 							PerlIO::gzip => 0,
+							Cache::File => 0,
 						},
 	($] >= 5.005 ?
 		(ABSTRACT_FROM	=> 'lib/Config/YUM.pm',

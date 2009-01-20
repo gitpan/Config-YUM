@@ -32,7 +32,7 @@ our @EXPORT = qw(
 );
 
 # Define our version, comes from CVS.
-(our $VERSION) = '$Revision: 1.9 $' =~ /([\d.]+)/;
+(our $VERSION) = '$Revision: 1.10 $' =~ /([\d.]+)/;
 
 # The new function is used to create an instance of this package.
 # You can define various things. Please have a look at the documentation
